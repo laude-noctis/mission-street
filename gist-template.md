@@ -1,10 +1,9 @@
-# Title (replace with your title)
-
-Introductory paragraph (replace this with your text)
-
-## Summary
-
-Briefly summarize the regex you will be describing and what you will explain. Include a code snippet of the regex. Replace this text with your summary.
+# Mission Street (Explaing an Email Regex)
+What is a regular expression? Well, a regular expression (or most commonly known as regex) is a string of characters that make up a search pattern. It uses special characters to look for different criterias. The one in which we will be dechiphering today is an email regex:  
+`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`  
+It looks like nonsense right now but after you read this explaintion, you will read it with ease!
+## Summary 
+In this explantion we will be breaking down each component of the regex. There are three sections in this expression. The username, the main domain name, and the top level doamin. We will explain each component used and the in-betweens.
 
 ## Table of Contents
 
@@ -12,38 +11,54 @@ Briefly summarize the regex you will be describing and what you will explain. In
 - [Quantifiers](#quantifiers)
 - [OR Operator](#or-operator)
 - [Character Classes](#character-classes)
-- [Flags](#flags)
+- [Character Escapes](#character-escapes)
 - [Grouping and Capturing](#grouping-and-capturing)
 - [Bracket Expressions](#bracket-expressions)
-- [Greedy and Lazy Match](#greedy-and-lazy-match)
-- [Boundaries](#boundaries)
-- [Back-references](#back-references)
-- [Look-ahead and Look-behind](#look-ahead-and-look-behind)
 
 ## Regex Components
+Regex reads the expression as literl (or case sensative), so 'a' is read as lowercase 'a'. It does not include uppercase 'A' when used in a regex.
+To use regex in code (JavaScript), you will need to enclose the expression in `/` so that JavaScript will read it as a regex.
+Now, let's discuss all the components in the "Mathing an Email"
 
 ### Anchors
-
+This regex includes two anchors `^` and `$`.  
+The `^` is used to search for anything that follows it. Such as, `^Ex` would only return every instance of a word beginning with "Ex", ex. *Ex*plain, *Ex*plore, or *Ex*stend. It would not include *ex*plain, *ex*plore, or *ex*stend due to regex being a case sensitive language.  
+The `$` is used to search for anything that ends with the expression that precedes it. Such as, `thing$` would return any word that ends in 'thing', ex. 'some*thing*', 'any*thing*', or 'brea*thing*'.  
+So the "Matching an Email" uses these to make sure anything in `/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.])$/` begins and ends with anything that matches this pattern. Now the `{2,6}` is not included because it is what is known as a quantifier.
 ### Quantifiers
+Quantifiers! A quantifier will set limits to what will match your string or a certain part of your string. The quantifier `{2,6}` is saying anything between 2 and 6 characters long will meet the criteria.  
+There are multiple quantifiers:  
+`*` will match the pattern 0 or more times.  
+`?` will match the pattern 0 or 1 time.  
+`+` will match the pattern 1 or more times.  
 
-### OR Operator
+The `+` quantifier is being used in the first section (username) of the email portion `[a-z0-9_\.-]+` to say that this pattern should match one or more occurences of the characters within the brackets.
 
+Curly brackets `{}` can decides the limit to the criteria that will match:  
+`{ x }` will match the exact amount of `x` times.  
+`{ x, }` will match the minimum amount of `x` times.  
+`{ x, y }` will the match the minimum of x to the maximum of y.  
+
+Now the `{2,6}` will only effect the criteria `[a-z\.]` of the expression since they are attached through parenthesis `([a-z\.]{2,6})`.
 ### Character Classes
-
-### Flags
-
+Character classes are used to search for a wide variety of things.  
+The most common are:  
+- `.` = any character except a newline character `/n`  
+- `/d` = any numerical digit  
+- `/w` = any character that is a letter `[a-zA-Z]` and the `_`  
+- `/s` = a single whitespace, including tabs and linebreaks  
+By captilizing the letter classes, it will create an inverse search. `/D` will match any value that is not a numerical digit.
+### Character Escapes
+The `\` is the escape character. It it used to treat special characters as normal characters. Such as the `-` and `.` are both special characters. The `.` is a special character that will match any character. And the `-` inside a character class `[]` creates a character range. `[a-c]` will search for any character that is a, b, or c.  That is why we need to put the `\` in front of them so they will be treated as the literal `.` and `-`.
 ### Grouping and Capturing
-
+In the email regex, there are three different groups being captured as referenced above. It uses `()` parentheses to group these parts and look for specific components of the email address.  
+`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/` 
+The username: `([a-z0-9_\.-]+)`  
+The domain name (ie. gmail, yahoo): `([\da-z\.-]+)`  
+The top level domain (ie. .com, .net): `([a-z\.]{2,6})`  
+Now, the username and the domain name are broken up by the literl `@`; the domain name and the top domain is broken up by the literal `.` (Remember `\.` needs the `\` in front of it so the special `.` will registered as just a normal character).
 ### Bracket Expressions
-
-### Greedy and Lazy Match
-
-### Boundaries
-
-### Back-references
-
-### Look-ahead and Look-behind
-
+Bracket Expressions are used to specify what kind of characters to look for using brackets `[]`. They are also considered charcter classes that we mentioned above. `[0-9]` is used to look for any number between 0 and 9. `[a-z]` will search for any lowercase letter and `[A-Z]` will search for any uppercase letters.  In the first part of the Email regex, `[a-z0-9_\.-]` is a bracket expression. `[a-z0-9]` searchs for lowecase letters and any number. `[_\.-]` looks for the literal characters of `_`, `.`, and `-`. These can be in any order, all these will meet the criteria: `test123`, `test.123`, and `test-123-test`.
 ## Author
-
-A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
+I'm Lizzie and I am studying to become a full-stack-developer.  
+github is [laude-noctis](https://github.com/laude-noctis) 
