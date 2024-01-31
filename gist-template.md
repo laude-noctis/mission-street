@@ -3,20 +3,26 @@ What is a regular expression? Well, a regular expression (or most commonly known
 `/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`  
 It looks like nonsense right now but after you read this explaintion, you will read it with ease!
 ## Summary 
-In this explantion we will be breaking down each component of the regex. There are three sections in this expression. The username, the main domain name, and the top level doamin. We will explain each component used and the in-betweens.
+The email regex is used to validate email addresses. It consists of several components to make sure that it fits the basic standardized email pattern. It uses multiple regex components to match the username (`([a-z0-9_\.-]+)`), the literal `@` symbol, the main domain name (`([\da-z\.-]+)\`), and the top level domain (`\.([a-z\.]{2,6})`).  
+`coolguy-12@gmail.com`  
+`percy_blue@gmail.com`  
+`annabeth.books13@gmail.com`  
+These emails would all be matched by our regular expressions.  
+This regex consists of the components anchors, quantifiers, character classes, character escapes, gourping and capturing, and bracket expressions.
+In this explantion we will be breaking down each of these components of the regex.
 
 ## Table of Contents
 
 - [Anchors](#anchors)
 - [Quantifiers](#quantifiers)
-- [OR Operator](#or-operator)
 - [Character Classes](#character-classes)
 - [Character Escapes](#character-escapes)
 - [Grouping and Capturing](#grouping-and-capturing)
 - [Bracket Expressions](#bracket-expressions)
 
 ## Regex Components
-Regex reads the expression as literl (or case sensative), so 'a' is read as lowercase 'a'. It does not include uppercase 'A' when used in a regex.
+Regex components are what make up an expression. They are building blocks used to make the construct the regular expression. They are the rules and pattern for searching and matching the text to the string. There are many different kinds of components in the world of regex, such as the Literals. These are characters in which they match themselves. For example, regex `abc` will only match the "abc" string. Literals are also case sensitive by default, so the literal `cat` will only match "cat" and not "Cat" or "CAT".
+
 To use regex in code (JavaScript), you will need to enclose the expression in `/` so that JavaScript will read it as a regex.
 Now, let's discuss all the components in the "Mathing an Email"
 
@@ -24,7 +30,7 @@ Now, let's discuss all the components in the "Mathing an Email"
 This regex includes two anchors `^` and `$`.  
 The `^` is used to search for anything that follows it. Such as, `^Ex` would only return every instance of a word beginning with "Ex", ex. *Ex*plain, *Ex*plore, or *Ex*stend. It would not include *ex*plain, *ex*plore, or *ex*stend due to regex being a case sensitive language.  
 The `$` is used to search for anything that ends with the expression that precedes it. Such as, `thing$` would return any word that ends in 'thing', ex. 'some*thing*', 'any*thing*', or 'brea*thing*'.  
-So the "Matching an Email" uses these to make sure anything in `/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.])$/` begins and ends with anything that matches this pattern. Now the `{2,6}` is not included because it is what is known as a quantifier.
+So the "Matching an Email" uses these to make sure anything in `/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.])$/` begins and ends with anything that matches the pattern within the components. Now the `{2,6}` is not included because it is what is known as a quantifier.
 ### Quantifiers
 Quantifiers! A quantifier will set limits to what will match your string or a certain part of your string. The quantifier `{2,6}` is saying anything between 2 and 6 characters long will meet the criteria.  
 There are multiple quantifiers:  
